@@ -1,0 +1,39 @@
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+        	<li><a href="/users">Users</a></li>
+        	<li><a href="/projects">Projects</a></li>
+        	<li><a href="/tasks">Tasks</a></li>
+	</ul>
+</nav>
+
+{% block content %}
+
+  <div class="container">
+  <h1>Projects</h1>
+    {% for project in projects %}
+    <ul id="project.name">
+      <li>
+        <span class="field-name">Id:</span>
+        <span class="field-value">{{ project.id }}</span>
+      </li>
+      <li>
+        <span class="field-name">Project:</span>
+        <span class="field-value">{{ project.name }}</span>
+      </li>
+      <li>
+        <span class="field-name">Users:</span>
+        <span class="field-value">{{ project.users }}</span>
+      </li>
+      <li>
+        <span class="field-name">Tasks:</span>
+        <span class="field-value">{{ project.tasks }}</span>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+
+{% endblock %}
