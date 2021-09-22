@@ -12,21 +12,26 @@
 
 {% block content %}
 
-  <div class="container">
-  <h1>Users</h1>
-    {% for user in users %}
-    <ul id="user.username">
-      <li>
-        <span class="field-name">Id:</span>
-        <span class="field-value">{{ user.id }}</span>
-      </li>
-      <li>
-        <span class="field-name">User:</span>
-        <span class="field-value">{{ user.username }}</span>
-      </li>
-    </ul>
-    {% endfor %}
-  </div>
+<div>
+	<h1>Users</h1>
+	<h2><a href="/users/add">Add</a></h2>
+	<h3><a href="/users/assign">Assign</a></h3>
+
+	{% for user in users %}
+
+	<form method="post">
+		<ul class="grid">
+			<li class="block">
+			<span>{{ user.username }}</span>
+			</li>
+			<input type="hidden" name="name" value={{ user.username }}>
+			<button type="submit">Delete</button>
+		</ul>
+	</form>
+
+	{% endfor %}
+
+</div>
 
 {% endblock %}
 

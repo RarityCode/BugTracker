@@ -1,13 +1,21 @@
-html {
-
-}
-
-h1 {
-
-}
-
 body {
 	background-color: #eee;
+}
+
+ul.grid {
+	border: solid 2px gray;
+	background: #455868;
+	float: left;
+	width: 20%;
+	height: 10%;
+	margin: 20px;
+}
+
+li.block {
+	display: block;
+	color: #fff;
+	font-family: 'PT Sans', Arial, sans-serif;
+	font-size: 11pt;
 }
 
 nav {

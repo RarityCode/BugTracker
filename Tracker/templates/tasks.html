@@ -12,32 +12,37 @@
 
 {% block content %}
 
-  <div class="container">
-  <h1>Tasks</h1>
-    {% for task in tasks %}
-    <ul id="task.name">
-      <li>
-        <span class="field-name">Id:</span>
-        <span class="field-value">{{ task.id }}</span>
-      </li>
-      <li>
-        <span class="field-name">Task:</span>
-        <span class="field-value">{{ task.name }}</span>
-      </li>
-      <li>
-        <span class="field-name">Text:</span>
-        <span class="field-value">{{ task.text }}</span>
-      </li>
-      <li>
-        <span class="field-name">Deadline:</span>
-        <span class="field-value">{{ task.deadline }}</span>
-      </li>
-      <li>
-        <span class="field-name">Users:</span>
-        <span class="field-value">{{ task.users }}</span>
-      </li>
-    </ul>
-    {% endfor %}
-  </div>
+<div>
+	<h1>Tasks</h1>
+	<h2><a href="/tasks/add">Add</a></h2>
+	<h3><a href="/tasks/assign">Assign</a></h3>
+
+	{% for task in tasks %}
+
+	<form method="post">
+		<ul class="grid">
+			<li class="block">
+			<span>{{ task.name }}</span>
+			</li>
+			<li class="block">
+			<span>Text:</span>
+			<span>{{ task.text }}</span>
+			</li>
+			<li class="block">
+			<span>Deadline:</span>
+			<span>{{ task.deadline }}</span>
+			</li>
+			<li class="block">
+			<span>Users:</span>
+			<span>{{ task.users }}</span>
+			</li>
+			<input type="hidden" name="name" value={{ task.name }}>
+			<button type="submit">Delete</button>
+		</ul>
+	</form>
+
+	{% endfor %}
+
+</div>
 
 {% endblock %}
