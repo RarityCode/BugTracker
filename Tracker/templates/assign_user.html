@@ -1,16 +1,33 @@
+<script src="/static/scripts.js"></script>
 
 <h1>Assign user</h1>
 
 <form method="post">
-	<div class="container">
-		<label><b>Username</b></label>
-		<input type="text" placeholder="Enter Username" name="username" required>
-		<label><b>Task</b></label>
-		<input type="text" placeholder="Enter Task name" name="task">
-		<label><b>Project</b></label>
-		<input type="text" placeholder="Enter Project name" name="project">
 
-		<button type="submit">Submit</button>
-	</div>
+	<label><b>Username</b></label>
+	<select id="user" name="username"></select>
+	{% for user in users %}
+		<script>AddOption('user', '{{user.username}}');</script>
+	{% endfor %}
+	
+	<label><b>Task</b></label>
+	<select id="task" name="task"></select>
+	{% for task in tasks %}
+		<script>AddOption('task', '{{task.name}}');</script>
+	{% endfor %}
+
+	<label><b>Project</b></label>
+	<select id="project" name="project"></select>
+	{% for project in projects %}
+		<script>AddOption('project', '{{project.name}}');</script>
+	{% endfor %}
+	
+	<button type="submit">Submit</button>
+
 </form>
+
+
+
+
+
 

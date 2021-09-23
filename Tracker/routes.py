@@ -35,7 +35,7 @@ def add_user():
 @app.route("/users/assign", methods=['GET', 'POST'])
 def assign_user():
     if request.method == 'GET':
-        return render_template("assign_user.html")
+        return render_template("assign_user.html",users = User.query.all(), projects=Project.query.all(), tasks=Task.query.all())
     if request.method == 'POST':
         try:
             username = request.form['username']
@@ -110,10 +110,10 @@ def add_task():
 @app.route("/tasks/assign", methods=['GET', 'POST'])
 def assign_task():
     if request.method == 'GET':
-        return render_template("assign_task.html")
+        return render_template("assign_task.html", projects=Project.query.all(), tasks=Task.query.all())
     if request.method == 'POST':
         try:
-            name = request.form['name']
+            name = request.form['task']
             project = request.form['project']
             task = db.session.query(Task).filter(Task.name == name).first()
             project = db.session.query(Project).filter(Project.name == project).first()
