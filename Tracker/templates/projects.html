@@ -15,14 +15,18 @@
 <div>
 	<h1>Projects</h1>
 	<h2><a href="/projects/add">Add</a></h2>
-	<h3></h3>
+	<h3><a href="/projects/assign">Assign</a></h3>
 
 	{% for project in projects %}
 
 	<form method="post">
 		<ul class="grid">
-			<li class="block">
+			<li class="block head">
         		<span>{{ project.name }}</span>
+			</li>
+			<li class="block">
+        		<span>Leader:</span>
+        		<span>{{ project.leader }}</span>
 			</li>
 			<li class="block">
         		<span>Users:</span>
@@ -30,10 +34,13 @@
 			</li>
 			<li class="block">
         		<span>Tasks:</span>
-        		<span>{{ project.tasks }}</span>
+			{% for task in project.tasks %}
+        		<span><a href="tasks/{{task}}">{{task}}</a></span>
+			{% endfor %}
 			</li>
+			
 			<input type="hidden" name="name" value={{ project.name }}>
-			<button type="submit">Delete</button>
+			<button type="submit" class="delete">Delete</button>
 		</ul>
 	</form>
 

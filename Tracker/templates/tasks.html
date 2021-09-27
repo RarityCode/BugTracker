@@ -21,8 +21,16 @@
 
 	<form method="post">
 		<ul class="grid">
-			<li class="block">
+			<li class="block head">
 			<span>{{ task.name }}</span>
+			</li>
+			<li class="block">
+			<span>Project:</span>
+			<span>{{ task.projects }}</span>
+			</li>
+			<li class="block">
+			<span>User:</span>
+			<span>{{ task.users }}</span>
 			</li>
 			<li class="block">
 			<span>Text:</span>
@@ -32,12 +40,9 @@
 			<span>Deadline:</span>
 			<span>{{ task.deadline }}</span>
 			</li>
-			<li class="block">
-			<span>Users:</span>
-			<span>{{ task.users }}</span>
-			</li>
+
 			<input type="hidden" name="name" value={{ task.name }}>
-			<button type="submit">Delete</button>
+			<button type="submit" class="delete">Delete</button>
 		</ul>
 	</form>
 

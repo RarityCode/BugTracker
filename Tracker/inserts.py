@@ -2,6 +2,7 @@ from .model import *
 
 def insert_data(db):
     try:
+        '''
         Ivan = User(username="Ivan Ivanov")
         Piotr = User(username="Piotr Petrovich")
         Sidor = User(username="Sidor Sidorovich")
@@ -9,6 +10,16 @@ def insert_data(db):
         db.session.add(Ivan)
         db.session.add(Piotr)
         db.session.add(Sidor)
+
+        lead1 = Leader()
+        Ivan.leader = lead1
+        db.session.add(lead1)
+        lead2 = Leader()
+        Piotr.leader = lead2
+        db.session.add(lead2)
+        lead3 = Leader()
+        Sidor.leader = lead3
+        db.session.add(lead3)
 
         Coffee = Task(name="Coffee", text="kupit kofe", deadline="zavtra")
         Tea = Task(name="Tea", text="kupit chai", deadline="zavtra")
@@ -37,7 +48,7 @@ def insert_data(db):
         Coffee.projects = Supplies
         Tea.projects = Supplies
         Plants.projects = Greenery
-
+        '''
         db.session.commit()
     except Exception:
         pass

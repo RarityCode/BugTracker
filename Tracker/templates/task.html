@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<ul class="grid">
+			<li class="block head">
+			<span>{{ task.name }}</span>
+			</li>
+			<li class="block">
+			<span>Project:</span>
+			<span>{{ task.projects }}</span>
+			</li>
+			<li class="block">
+			<span>User:</span>
+			<span>{{ task.users }}</span>
+			</li>
+			<li class="block">
+			<span>Text:</span>
+			<span>{{ task.text }}</span>
+			</li>
+			<li class="block">
+			<span>Deadline:</span>
+			<span>{{ task.deadline }}</span>
+			</li>
+</ul>
+
+
+

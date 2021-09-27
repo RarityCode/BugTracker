@@ -2,13 +2,21 @@ body {
 	background-color: #eee;
 }
 
+div.form, h1 {
+	text-align: center;
+}
+
 ul.grid {
 	border: solid 2px gray;
 	background: #455868;
 	float: left;
 	width: 20%;
-	height: 10%;
+	height: auto;
 	margin: 20px;
+}
+
+li.head {
+	text-align: center;
 }
 
 li.block {
@@ -16,6 +24,11 @@ li.block {
 	color: #fff;
 	font-family: 'PT Sans', Arial, sans-serif;
 	font-size: 11pt;
+}
+
+button.delete {
+	position: relative;
+	right: -85%;
 }
 
 nav {

@@ -1,15 +1,46 @@
+<script src="/static/scripts.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+        	<li><a href="/users">Users</a></li>
+        	<li><a href="/projects">Projects</a></li>
+        	<li><a href="/tasks">Tasks</a></li>
+	</ul>
+</nav>
 
 <h1>Add new task</h1>
 
 <form method="post">
-	<div class="container">
-		<label><b>Name</b></label>
+	<div class='form'>
+		<p>
+		<label><b>Name:</b></label>
 		<input type="text" placeholder="Enter Name" name="name" required>
-		<label><b>Text</b></label>
+		</p>
+		<p>		
+		<label><b>Text:</b></label>
 		<input type="text" placeholder="Enter Text" name="text" required>
-		<label><b>Deadline</b></label>
+		</p>
+		<p>
+		<label><b>Deadline:</b></label>
 		<input type="text" placeholder="Enter Deadline" name="deadline" required>
-
+		</p>
+		<p>
+		<label><b>Project:</b></label>
+		<select id="project" name="project"></select>
+		{% for project in projects %}
+			<script>AddOption('project', '{{project.name}}');</script>
+		{% endfor %}
+		</p>
+		<p>
+		<label><b>User:</b></label>
+		<select id="user" name="user"></select>
+		{% for user in users %}
+			<script>AddOption('user', '{{user.username}}');</script>
+		{% endfor %}
+		</p>
 		<button type="submit">Submit</button>
 	</div>
 </form>

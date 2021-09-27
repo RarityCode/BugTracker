@@ -1,11 +1,31 @@
+<script src="/static/scripts.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+        	<li><a href="/users">Users</a></li>
+        	<li><a href="/projects">Projects</a></li>
+        	<li><a href="/tasks">Tasks</a></li>
+	</ul>
+</nav>
 
 <h1>Add new project</h1>
 
 <form method="post">
-	<div class="container">
+	<div class='form'>
+		<p>
 		<label><b>Name</b></label>
 		<input type="text" placeholder="Enter project name" name="name" required>
-
+		</p>
+		<p>
+		<label><b>Leader</b></label>
+		<select id="user" name="username"></select>
+		{% for user in users %}
+			<script>AddOption('user', '{{user.username}}');</script>
+		{% endfor %}
+		</p>
 		<button type="submit">Submit</button>
 	</div>
 </form>

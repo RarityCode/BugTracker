@@ -21,11 +21,24 @@
 
 	<form method="post">
 		<ul class="grid">
-			<li class="block">
+			<li class="block head">
 			<span>{{ user.username }}</span>
 			</li>
+			<li class="block">
+			<span>Lead in projects:</span>
+			<span>{{ user.leader.projects }}</span>
+			</li>
+			<li class="block">
+			<span>Works on project:</span>
+			<span>{{ user.projects }}</span>
+			</li>
+			<li class="block">
+			<span>Current tasks:</span>
+			<span>{{ user.tasks }}</span>
+			</li>
+
 			<input type="hidden" name="name" value={{ user.username }}>
-			<button type="submit">Delete</button>
+			<button type="submit" class="delete">Delete</button>
 		</ul>
 	</form>
 

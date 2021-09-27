@@ -26,6 +26,9 @@ def add_user():
         try:
             username = request.form['username']
             user = User(username=username)
+            lead = Leader()
+            user.leader = lead
+            db.session.add(lead)
             db.session.add(user)
             db.session.commit()
         except Exception:
@@ -38,18 +41,13 @@ def assign_user():
         return render_template("assign_user.html",users = User.query.all(), projects=Project.query.all(), tasks=Task.query.all())
     if request.method == 'POST':
         try:
-            username = request.form['username']
-            taskname = request.form['task']
-            projectname = request.form['project']
-            user = db.session.query(User).filter(User.username == username).first()
-            task = db.session.query(Task).filter(Task.name == taskname).first()
-            project = db.session.query(Project).filter(Project.name == projectname).first()
-            user.tasks = task
-            user.projects = project
-            if task is not None and project is not None:
-                task.projects = project
-                db.session.add(task)
-            db.session.add(user)
+            user = request.form['user']
+            task = request.form['task']
+            user = db.session.query(User).filter(User.username == user).first()
+            task = db.session.query(Task).filter(Task.name == task).first()
+            task.users = user
+            user.projects = task.projects
+            db.session.add(task)
             db.session.commit()
         except Exception:
             return 'error'
@@ -69,11 +67,31 @@ def projects():
 @app.route("/projects/add", methods=['GET', 'POST'])
 def add_project():
     if request.method == 'GET':
-        return render_template("add_project.html")
+        return render_template("add_project.html",users = User.query.all())
     if request.method == 'POST':
         try:
             name = request.form['name']
+            lead = request.form['username']
             project = Project(name=name)
+            leader = db.session.query(Leader).filter(Leader.user.has(User.username == lead)).first()
+            project.leader = leader
+            db.session.add(project)
+            db.session.commit()
+        except Exception:
+            return 'error'
+        return redirect("/projects")
+
+@app.route("/projects/assign", methods=['GET', 'POST'])
+def assign_project():
+    if request.method == 'GET':
+        return render_template("assign_project.html",users = User.query.all(), projects=Project.query.all())
+    if request.method == 'POST':
+        try:
+            project = request.form['project']
+            leader = request.form['leader']
+            project = db.session.query(Project).filter(Project.name == project).first()
+            leader = db.session.query(Leader).filter(Leader.user.has(User.username == leader)).first()
+            project.leader = leader
             db.session.add(project)
             db.session.commit()
         except Exception:
@@ -91,16 +109,29 @@ def tasks():
         db.session.commit()
         return redirect("/tasks")
 
+@app.route("/tasks/<name>", methods=['GET'])
+def task(name=None):
+    task = Task.query.filter(Task.name == name).first()
+    return render_template("task.html", task=task)
+
 @app.route("/tasks/add", methods=['GET', 'POST'])
 def add_task():
     if request.method == 'GET':
-        return render_template("add_task.html")
+        return render_template("add_task.html", projects=Project.query.all(), users = User.query.all())
     if request.method == 'POST':
         try:
             name = request.form['name']
             text = request.form['text']
             deadline = request.form['deadline']
+            project = request.form['project']
+            user = request.form['user']
             task = Task(name=name, text=text, deadline=deadline)
+            project = db.session.query(Project).filter(Project.name == project).first()
+            user = db.session.query(User).filter(User.username == user).first()
+            task.projects = project
+            task.users = user
+            user.projects = task.projects
+            db.session.add(user)
             db.session.add(task)
             db.session.commit()
         except Exception:
@@ -110,14 +141,16 @@ def add_task():
 @app.route("/tasks/assign", methods=['GET', 'POST'])
 def assign_task():
     if request.method == 'GET':
-        return render_template("assign_task.html", projects=Project.query.all(), tasks=Task.query.all())
+        return render_template("assign_task.html", projects=Project.query.all(), tasks=Task.query.all(), users = User.query.all())
     if request.method == 'POST':
         try:
-            name = request.form['task']
-            project = request.form['project']
-            task = db.session.query(Task).filter(Task.name == name).first()
-            project = db.session.query(Project).filter(Project.name == project).first()
-            task.projects = project
+            task = request.form['task']
+            user = request.form['user']
+            task = db.session.query(Task).filter(Task.name == task).first()
+            user = db.session.query(User).filter(User.username == user).first()
+            task.users = user
+            user.projects = task.projects
+            db.session.add(user)
             db.session.add(task)
             db.session.commit()
         except Exception:

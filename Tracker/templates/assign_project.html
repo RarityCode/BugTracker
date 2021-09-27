@@ -11,30 +11,26 @@
 	</ul>
 </nav>
 
-<h1>Assign user</h1>
+<h1>Assign project</h1>
 
 <form method="post">
 	<div class='form'>
 	<p>
-	<label><b>Username:</b></label>
-	<select id="user" name="user"></select>
-	{% for user in users %}
-		<script>AddOption('user', '{{user.username}}');</script>
+	<label><b>Project:</b></label>
+	<select id="project" name="project"></select>
+	{% for project in projects %}
+		<script>AddOption('project', '{{project.name}}');</script>
 	{% endfor %}
 	</p>
 	<p>
-	<label><b>Task:</b></label>
-	<select id="task" name="task"></select>
-	{% for task in tasks %}
-		<script>AddOption('task', '{{task.name}}');</script>
+	<label><b>Leader:</b></label>
+	<select id="leader" name="leader"></select>
+	{% for user in users %}
+		<script>AddOption('leader', '{{user.username}}');</script>
 	{% endfor %}
 	</p>
 	<button type="submit">Submit</button>
-
 </form>
-
-
-
 
 
 
